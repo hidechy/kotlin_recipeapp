@@ -10,6 +10,8 @@ import kotlinx.android.synthetic.main.item_rv_main_category.view.*
 
 class MainCategoryAdapter : RecyclerView.Adapter<MainCategoryAdapter.RecipeViewHolder>() {
 
+    var listener: OnItemClickListener? = null
+
     var ctx: Context? = null
 
     var arrMainCategory = ArrayList<CategoryItems>()
@@ -37,6 +39,19 @@ class MainCategoryAdapter : RecyclerView.Adapter<MainCategoryAdapter.RecipeViewH
 
         Glide.with(ctx!!).load(arrMainCategory[position].strcategorythumb)
             .into(holder.itemView.img_dish)
+
+        holder.itemView.rootView.setOnClickListener {
+            listener!!.onClicked(arrMainCategory[position].strcategory)
+        }
+
+    }
+
+    interface OnItemClickListener{
+        fun onClicked(categoryName:String)
+    }
+
+    fun setClickListener(listener1: OnItemClickListener){
+        listener = listener1
     }
 
 }

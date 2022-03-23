@@ -10,9 +10,12 @@ import kotlinx.android.synthetic.main.item_rv_main_category.view.*
 
 class SubCategoryAdapter: RecyclerView.Adapter<SubCategoryAdapter.RecipeViewHolder>() {
 
-    var listener: OnItemClickListener? = null
+//    var listener: OnItemClickListener? = null
+
     var ctx :Context? = null
+
     var arrSubCategory = ArrayList<MealsItems>()
+
     class RecipeViewHolder(view: View): RecyclerView.ViewHolder(view){
 
     }
@@ -23,6 +26,7 @@ class SubCategoryAdapter: RecyclerView.Adapter<SubCategoryAdapter.RecipeViewHold
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         ctx = parent.context
+
         return RecipeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_rv_sub_category,parent,false))
     }
 
@@ -30,9 +34,9 @@ class SubCategoryAdapter: RecyclerView.Adapter<SubCategoryAdapter.RecipeViewHold
         return arrSubCategory.size
     }
 
-    fun setClickListener(listener1: OnItemClickListener){
-        listener = listener1
-    }
+//    fun setClickListener(listener1: OnItemClickListener){
+//        listener = listener1
+//    }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
 
@@ -40,9 +44,9 @@ class SubCategoryAdapter: RecyclerView.Adapter<SubCategoryAdapter.RecipeViewHold
 
         Glide.with(ctx!!).load(arrSubCategory[position].strMealThumb).into(holder.itemView.img_dish)
 
-        holder.itemView.rootView.setOnClickListener {
-            listener!!.onClicked(arrSubCategory[position].idMeal)
-        }
+//        holder.itemView.rootView.setOnClickListener {
+//            listener!!.onClicked(arrSubCategory[position].idMeal)
+//        }
     }
 
     interface OnItemClickListener{

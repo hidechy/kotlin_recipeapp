@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
 class Meal(
 
     @PrimaryKey(autoGenerate = true)
-    var id:Int,
+    var id: Int,
 
     @ColumnInfo(name = "meals")
     @Expose

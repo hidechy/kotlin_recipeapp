@@ -17,4 +17,10 @@ interface RecipeDao {
     @Query("DELETE FROM categoryitems")
     suspend fun clearDb()
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMeal(mealsItems: MealsItems?)
+
+    @Query("SELECT * FROM MealItems WHERE categoryName = :categoryName ORDER BY id DESC")
+    suspend fun getSpecificMealList(categoryName:String) : List<MealsItems>
+
 }

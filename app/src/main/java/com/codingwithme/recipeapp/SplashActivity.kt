@@ -2,6 +2,7 @@ package com.codingwithme.recipeapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.coroutines.launch
@@ -35,10 +36,33 @@ class SplashActivity : BaseActivity(), EasyPermissions.RationaleCallbacks,
         val call = service.getCategoryList()
         call.enqueue(object : Callback<Category> {
             override fun onResponse(call: Call<Category>, response: Response<Category>) {
+
+                for (arr in response.body()!!.categorieitems!!) {
+                    getMeal(arr.strcategory)
+                }
+
                 insertDataIntoRoomDb(response.body())
             }
 
             override fun onFailure(call: Call<Category>, t: Throwable) {
+                Toast.makeText(this@SplashActivity, "Something went wrong", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+        })
+
+    }
+
+    fun getMeal(categoryName: String) {
+        val service = RetrofitClientInstance.retrofitInstance.create(GetDataService::class.java)
+
+        val call = service.getMealList(categoryName)
+        call.enqueue(object : Callback<Meal> {
+            override fun onResponse(call: Call<Meal>, response: Response<Meal>) {
+                insertMealDataIntoRoomDb(categoryName, response.body())
+            }
+
+            override fun onFailure(call: Call<Meal>, t: Throwable) {
                 Toast.makeText(this@SplashActivity, "Something went wrong", Toast.LENGTH_SHORT)
                     .show()
             }
@@ -63,6 +87,39 @@ class SplashActivity : BaseActivity(), EasyPermissions.RationaleCallbacks,
         }
     }
 
+    fun insertMealDataIntoRoomDb(categoryName: String, meal: Meal?) {
+
+        launch {
+            this.let {
+
+                for (arr in meal!!.mealsItem!!) {
+
+                    var mealItemModel = MealsItems(
+                        arr.id,
+                        arr.idMeal,
+                        categoryName,
+                        arr.strMeal,
+                        arr.strMealThumb
+                    )
+
+                    RecipeDatabase.getDatabase(this@SplashActivity)
+                        .recipeDao().insertMeal(mealItemModel)
+
+                    Log.d("mealData", arr.toString())
+
+                }
+            }
+        }
+    }
+
+    fun clearDataBase() {
+        launch {
+            this.let {
+                RecipeDatabase.getDatabase(this@SplashActivity).recipeDao().clearDb()
+            }
+        }
+    }
+
     private fun hasReadStoragePermission(): Boolean {
         return EasyPermissions.hasPermissions(
             this,
@@ -72,6 +129,9 @@ class SplashActivity : BaseActivity(), EasyPermissions.RationaleCallbacks,
 
     private fun readStorageTask() {
         if (hasReadStoragePermission()) {
+
+            clearDataBase()
+
             getCategories()
         } else {
             EasyPermissions.requestPermissions(

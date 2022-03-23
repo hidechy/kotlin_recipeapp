@@ -6,28 +6,28 @@ import com.google.gson.reflect.TypeToken
 
 class MealListConverter {
     @TypeConverter
-    fun fromCategoryList(category: List<MealsItems>):String?{
-        if (category == null){
+    fun fromCategoryList(category: List<MealsItems>): String? {
+        if (category == null) {
             return (null)
-        }else{
+        } else {
             val gson = Gson()
-            val type = object : TypeToken<MealsItems>(){
+            val type = object : TypeToken<MealsItems>() {
 
             }.type
-            return gson.toJson(category,type)
+            return gson.toJson(category, type)
         }
     }
 
     @TypeConverter
-    fun toCategoryList ( categoryString: String):List<MealsItems>?{
-        if (categoryString == null){
+    fun toCategoryList(categoryString: String): List<MealsItems>? {
+        if (categoryString == null) {
             return (null)
-        }else{
+        } else {
             val gson = Gson()
-            val type = object :TypeToken<MealsItems>(){
+            val type = object : TypeToken<MealsItems>() {
 
             }.type
-            return  gson.fromJson(categoryString,type)
+            return gson.fromJson(categoryString, type)
         }
     }
 }
