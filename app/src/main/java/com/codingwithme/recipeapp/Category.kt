@@ -1,7 +1,6 @@
-package com.codingwithme.recipeapp.entities
+package com.codingwithme.recipeapp
 
 import androidx.room.*
-import com.codingwithme.recipeapp.entities.converter.CategoryListConverter
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 

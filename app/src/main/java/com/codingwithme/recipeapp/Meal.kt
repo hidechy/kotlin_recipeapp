@@ -1,10 +1,9 @@
-package com.codingwithme.recipeapp.entities
+package com.codingwithme.recipeapp
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.codingwithme.recipeapp.entities.converter.MealListConverter
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 

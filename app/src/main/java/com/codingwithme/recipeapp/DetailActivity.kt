@@ -7,9 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.codingwithme.recipeapp.entities.MealResponse
-import com.codingwithme.recipeapp.interfaces.GetDataService
-import com.codingwithme.recipeapp.retofitclient.RetrofitClientInstance
 import kotlinx.android.synthetic.main.activity_detail.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,7 +38,26 @@ class DetailActivity : BaseActivity() {
 
     fun getSpecificItem(id:String) {
         val service = RetrofitClientInstance.retrofitInstance!!.create(GetDataService::class.java)
-        val call = service.getSpecificItem(id)
+
+
+
+
+
+
+
+
+        //val call = service.getSpecificItem(id)
+
+
+
+
+
+
+
+
+
+
+        /*
         call.enqueue(object : Callback<MealResponse> {
             override fun onFailure(call: Call<MealResponse>, t: Throwable) {
 
@@ -90,6 +106,10 @@ class DetailActivity : BaseActivity() {
             }
 
         })
+        */
+
+
+
     }
 
 

@@ -1,4 +1,4 @@
-package com.codingwithme.recipeapp.entities
+package com.codingwithme.recipeapp
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

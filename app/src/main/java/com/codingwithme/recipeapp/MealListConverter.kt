@@ -1,10 +1,6 @@
-package com.codingwithme.recipeapp.entities.converter
+package com.codingwithme.recipeapp
 
 import androidx.room.TypeConverter
-import androidx.room.TypeConverters
-import com.codingwithme.recipeapp.entities.Category
-import com.codingwithme.recipeapp.entities.CategoryItems
-import com.codingwithme.recipeapp.entities.MealsItems
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
